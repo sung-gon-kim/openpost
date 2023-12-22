@@ -12,6 +12,10 @@ Install Django official realease with pip
 
     $ python manage.py test openpost
 
+## How to create DB tables
+
+    $ python manage.py migrate
+
 ## How to run dev-server
 
 You may access the development server via a web-browser after the following command:
