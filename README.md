@@ -23,6 +23,12 @@ You may access the development server via a web-browser after the following comm
 
     $ python manage.py runserver 0.0.0.0:8000
 
+## How to login as a super user
+
+    $ python manage.py createsuperuser
+
+Then, access http://localhost:8000/admin via a web-browser
+
 ## License
 
 This project source code is available under MIT license. Please see [LICENSE](LICENSE).
