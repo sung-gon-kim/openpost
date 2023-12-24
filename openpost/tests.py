@@ -20,15 +20,14 @@ class ColumnTests(TestCase):
 class NoteTests(TestCase):
     def setUp(self):
         self.column = Column.objects.create(title="column", description="description")
-        self.note = Note.objects.create(column=self.column, title="note", content="content")
+        self.note = Note.objects.create(column=self.column, content="content")
 
     def test_create(self):
-        self.assertEqual("note", str(self.note))
-        self.assertEqual("note", self.note.title)
+        self.assertEqual("content", str(self.note))
         self.assertEqual("content", self.note.content)
 
-    def test_title_is_not_unique(self):
-        Note.objects.create(column=self.column, title="note", content="content")
+    def test_content_is_not_unique(self):
+        Note.objects.create(column=self.column, content="content")
 
     def test_cascade_delete(self):
         self.column.delete()
@@ -37,7 +36,7 @@ class NoteTests(TestCase):
 class CommentTests(TestCase):
     def setUp(self):
         self.column = Column.objects.create(title="column", description="description")
-        self.note = Note.objects.create(column=self.column, title="note", content="content")
+        self.note = Note.objects.create(column=self.column, content="content")
         self.comment = Comment.objects.create(note=self.note, content="content")
 
     def test_create(self):
