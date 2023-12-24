@@ -4,7 +4,6 @@ from .models import Note
 from django.db.utils import IntegrityError
 from django.test import TestCase
 
-
 class ColumnTests(TestCase):
     def setUp(self):
         self.column = Column.objects.create(title="column", description="description")
