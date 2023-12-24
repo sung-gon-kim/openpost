@@ -14,6 +14,7 @@ Install Django official realease with pip
 
 ## How to create DB tables
 
+    $ python manage.py makemigrations openpost
     $ python manage.py migrate
 
 ## How to run dev-server

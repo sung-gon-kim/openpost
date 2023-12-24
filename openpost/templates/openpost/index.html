@@ -13,10 +13,11 @@
 	<div class="col">
 	  <div class="card">
 	    <div class="card-body">
-	      <h5 class="card-title">{{ column.title }}</h5>
 	      <p class="card-text">{{ column.description }}</p>
 	    </div>
 	  </div>
+	  {% empty %}
+	  <p>No colums exist</p>
 	</div>
 	{% endfor %}
       </div>
