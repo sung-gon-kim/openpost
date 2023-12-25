@@ -1,9 +1,9 @@
-<div class="container">
-  <div class="row align-items-start g-3">
+<div class="container my-5">
+  <div class="row g-3">
     {% for section, posts in groups %}
     <div class="col">
-      <h1>{{ section }}</h1>
-      {% include "./posts.html" with posts=posts %}
+      <h2>{{ section }}</h2>
+      {% include "./posts.html" with section=section posts=posts %}
     </div>
     {% empty %}
     {% endfor %}
