@@ -4,9 +4,9 @@ This project is a simple web application which supports team communications incl
 
 ## Prerequisite
 
-Install Django official realease with pip
+You need to install the following packages
 
-    $ python -m pip install Django
+    $ python -m pip install Django django-model-utils
 
 ## How to run tests
 

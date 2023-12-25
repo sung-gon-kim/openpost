@@ -1,7 +1,7 @@
-from .models import Column
+from .models import Post
 from django.http import HttpResponse
 from django.shortcuts import render
 
 def index(request):
-    context = { "columns": Column.objects.all() }
+    context = { "data": Post.objects.all() }
     return render(request, "openpost/index.html", context=context)

@@ -1,16 +1,11 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext as _
+from model_utils import Choices
 
-class Column(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField()
-    created = timezone.now()
-
-    def __str__(self):
-        return self.title
-
-class Note(models.Model):
-    column = models.ForeignKey("Column", on_delete=models.CASCADE)
+class Post(models.Model):
+    SECTION = Choices('공지사항', '질문', '의견')
+    section = models.CharField(choices=SECTION, default=SECTION.공지사항, max_length=10)
     content = models.TextField()
     created = timezone.now()
 
@@ -18,7 +13,7 @@ class Note(models.Model):
         return self.content
 
 class Comment(models.Model):
-    note = models.ForeignKey("Note", on_delete=models.CASCADE)
+    post = models.ForeignKey("Post", on_delete=models.CASCADE)
     content = models.TextField()
     created = timezone.now()
 

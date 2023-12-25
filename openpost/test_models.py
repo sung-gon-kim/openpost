@@ -1,50 +1,31 @@
-from .models import Column
 from .models import Comment
-from .models import Note
+from .models import Post
 from django.db.utils import IntegrityError
 from django.test import TestCase
 
-class ColumnTests(TestCase):
+class PostTests(TestCase):
     def setUp(self):
-        self.column = Column.objects.create(title="column", description="description")
+        self.post = Post.objects.create(content="content")
 
     def test_create(self):
-        self.assertEqual("column", str(self.column))
-        self.assertEqual("column", self.column.title)
-        self.assertEqual("description", self.column.description)
-
-    def test_title_is_not_unique(self):
-        Column.objects.create(title="column", description="description")
-
-class NoteTests(TestCase):
-    def setUp(self):
-        self.column = Column.objects.create(title="column", description="description")
-        self.note = Note.objects.create(column=self.column, content="content")
-
-    def test_create(self):
-        self.assertEqual("content", str(self.note))
-        self.assertEqual("content", self.note.content)
+        self.assertEqual("content", str(self.post))
+        self.assertEqual("content", self.post.content)
 
     def test_content_is_not_unique(self):
-        Note.objects.create(column=self.column, content="content")
-
-    def test_cascade_delete(self):
-        self.column.delete()
-        self.assertEqual(0, Note.objects.count())
+        Post.objects.create(content="content")
 
 class CommentTests(TestCase):
     def setUp(self):
-        self.column = Column.objects.create(title="column", description="description")
-        self.note = Note.objects.create(column=self.column, content="content")
-        self.comment = Comment.objects.create(note=self.note, content="content")
+        self.post = Post.objects.create(content="content")
+        self.comment = Comment.objects.create(post=self.post, content="content")
 
     def test_create(self):
         self.assertEqual("content", str(self.comment))
         self.assertEqual("content", self.comment.content)
 
     def test_content_is_not_unique(self):
-        Comment.objects.create(note=self.note, content="content")
+        Comment.objects.create(post=self.post, content="content")
 
     def test_cascade_delete(self):
-        self.note.delete()
+        self.post.delete()
         self.assertEqual(0, Comment.objects.count())
