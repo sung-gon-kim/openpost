@@ -1,7 +1,7 @@
 <div class="col">
   <h3 class="text-center">{{ section }}</h3>
   {% include "./posts.html" with posts=posts %}
-  <form action="{% url 'openpost:post' %}" method="post">
+  <form action="{% url 'openpost:add_post' %}" method="post">
     {% csrf_token %}
     <input type="hidden" name="section" value="{{ section }}">
     <div class="form-group"><input type="text" class="form-control form-control-sm" name="subject" placeholder="제목" required></div>

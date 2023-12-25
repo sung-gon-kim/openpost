@@ -11,7 +11,7 @@ def index(request):
     }
     return render(request, "openpost/index.html", context=context)
 
-def post(request):
+def add_post(request):
     o = Post.objects.create(section=request.POST["section"],
                             subject=request.POST["subject"],
                             content=request.POST["content"])
