@@ -1,0 +1,6 @@
+<ul class="list-group list-group-flush">
+  {% for comment in comments %}
+  <li class="list-group-item"><small>{{ comment.content }}</small></li>
+  {% empty %}
+  {% endfor %}
+</ul>

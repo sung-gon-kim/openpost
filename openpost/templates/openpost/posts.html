@@ -1,0 +1,14 @@
+{% for post in posts %}
+<div class="card" style="width:30rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ post.subject }}</h5>
+    <p class="card-text">{{ post.content }}</p>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+      <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-trash3"></i></a>
+    </div>
+    {% include "./comments.html" with comments=post.comment_set.all %}
+  </div>
+</div>
+{% empty %}
+{% endfor %}
