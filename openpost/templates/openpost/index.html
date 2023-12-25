@@ -1,4 +1,9 @@
 {% include "./html_header.html" %}
-{% regroup data by section as groups %}
-{% include "./sections.html" with groups=groups %}
+<div class="container my-5">
+  <div class="row g-3">
+    {% include "./sections.html" with section="공지사항" posts=notices %}
+    {% include "./sections.html" with section="질문" posts=questions %}
+    {% include "./sections.html" with section="의견" posts=opinions %}
+  </div>
+</div>
 {% include "./html_footer.html" %}
