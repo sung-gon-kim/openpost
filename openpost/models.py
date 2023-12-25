@@ -6,11 +6,12 @@ from model_utils import Choices
 class Post(models.Model):
     SECTION = Choices('공지사항', '질문', '의견')
     section = models.CharField(choices=SECTION, default=SECTION.공지사항, max_length=10)
+    subject = models.CharField(default="Untitled", max_length=100)
     content = models.TextField()
     created = timezone.now()
 
     def __str__(self):
-        return self.content
+        return self.subject
 
 class Comment(models.Model):
     post = models.ForeignKey("Post", on_delete=models.CASCADE)

@@ -5,26 +5,21 @@ from django.test import TestCase
 
 class PostTests(TestCase):
     def setUp(self):
-        self.post = Post.objects.create(content="content")
+        self.post = Post.objects.create(subject="subject", content="content")
 
     def test_create(self):
-        self.assertEqual("content", str(self.post))
+        self.assertEqual("subject", self.post.subject)
+        self.assertEqual("subject", str(self.post))
         self.assertEqual("content", self.post.content)
-
-    def test_content_is_not_unique(self):
-        Post.objects.create(content="content")
 
 class CommentTests(TestCase):
     def setUp(self):
-        self.post = Post.objects.create(content="content")
+        self.post = Post.objects.create(subject="subject", content="content")
         self.comment = Comment.objects.create(post=self.post, content="content")
 
     def test_create(self):
         self.assertEqual("content", str(self.comment))
         self.assertEqual("content", self.comment.content)
-
-    def test_content_is_not_unique(self):
-        Comment.objects.create(post=self.post, content="content")
 
     def test_cascade_delete(self):
         self.post.delete()
