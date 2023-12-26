@@ -12,8 +12,14 @@ def index(request):
     return render(request, "openpost/index.html", context=context)
 
 def add_post(request):
-    o = Post.objects.create(section=request.POST["section"],
-                            subject=request.POST["subject"],
-                            content=request.POST["content"])
-    o.save()
+    if "section" in request.POST and "subject" in request.POST and "content" in request.POST:
+        o = Post.objects.create(section=request.POST["section"],
+                                subject=request.POST["subject"],
+                                content=request.POST["content"])
+        o.save()
+    return redirect("openpost:index")
+
+def remove_post(request, id):
+    if id is not None:
+        Post.objects.filter(id=id).delete()
     return redirect("openpost:index")

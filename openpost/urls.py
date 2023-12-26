@@ -5,5 +5,6 @@ from . import views
 app_name = "openpost"
 urlpatterns = [
     path("", views.index, name="index"),
-    path("add_post/", views.add_post, name="add_post"),
+    path("post/add", views.add_post, name="add_post"),
+    path("post/remove/<int:id>", views.remove_post, name="remove_post"),
 ]
