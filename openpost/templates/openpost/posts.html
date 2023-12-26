@@ -4,7 +4,7 @@
     <h5 class="card-title d-flex justify-content-between align-items-center">
       {{ post.subject }}
       <div>
-	<a href="{% url 'openpost:remove_post' id=post.id %}" class="btn btn-outline-primary btn-sm"><i class="bi bi-trash3"></i></a>
+	<a href="{% url 'openpost:remove_post' id=post.id %}" class="btn btn-outline-light btn-sm"><i class="bi bi-trash3"></i></a>
       </div>
     </h5>
     <p class="card-text">{{ post.content }}</p>

@@ -32,3 +32,8 @@ def add_comment(request):
                                          content=request.POST["content"])
         comment.save()
     return redirect("openpost:index")
+
+def remove_comment(request, id):
+    if id is not None:
+        Comment.objects.filter(id=id).delete()
+    return redirect("openpost:index")
