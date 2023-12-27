@@ -1,5 +1,5 @@
 {% for post in posts %}
-<div class="card my-2">
+<div class="card shadow-sm bg-white rounded my-2">
   <div class="card-body">
     <h5 class="card-title d-flex justify-content-between align-items-center">
       {{ post.subject }}
@@ -12,7 +12,7 @@
     <form action="{% url 'openpost:add_comment' %}" method="post">
       {% csrf_token %}
       <input type="hidden" name="post" value="{{ post.id }}">
-      <div class="col-auto"><input type="text" class="form-control form-control-sm" name="content" placeholder="내용" pattern=".{1.50}" title="최대 50글자 입력 제한" required></div>
+      <div class="col-auto"><input type="text" class="form-control form-control-sm" name="content" placeholder="내용" pattern=".{1,50}" title="최대 50글자 입력 제한" required></div>
       <input type="submit" hidden>
     </form>
   </div>
