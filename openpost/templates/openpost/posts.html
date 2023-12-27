@@ -4,10 +4,10 @@
     <h5 class="card-title d-flex justify-content-between align-items-center">
       {{ post.subject }}
       <div>
-	<a href="{% url 'openpost:remove_post' id=post.id %}" class="btn btn-outline-light btn-sm"><i class="bi bi-trash3"></i></a>
+	<a href="{% url 'openpost:remove_post' id=post.id %}" class="btn btn-outline-light btn-sm" onclick="return confirm('메세지를 삭제하시겠습니까?')"><i class="bi bi-trash3"></i></a>
       </div>
     </h5>
-    <p class="card-text">{{ post.content }}</p>
+    <p class="card-text">{{ post.content|urlize }}</p>
     {% include "./comments.html" with comments=post.comment_set.all %}
     <form action="{% url 'openpost:add_comment' %}" method="post">
       {% csrf_token %}
