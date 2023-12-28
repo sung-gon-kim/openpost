@@ -1,0 +1,29 @@
+<div class="modal" id="confirmRemoval" tabindex="-1" role="dialog" aria-labelledby="confirmRemovalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+	<h1 class="modal-title fs-5" id="confirmRemovalLabel">삭제 확인</h1>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+	메시지를 완전히 삭제합니다. 계속하시겠습니까?
+      </div>
+      <div class="modal-footer">
+	<a href="#" class="btn btn-primary">삭제</a>
+	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const confirmRemoval = document.getElementById('confirmRemoval')
+  if (confirmRemoval) {
+      confirmRemoval.addEventListener('show.bs.modal', event => {
+	  const button = event.relatedTarget
+	  const href = button.getAttribute('data-bs-href')
+	  const anchor = confirmRemoval.querySelector('.modal-footer a')
+	  anchor.href = href
+      })
+  }
+</script>

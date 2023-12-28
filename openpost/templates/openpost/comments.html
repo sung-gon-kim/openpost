@@ -8,7 +8,7 @@
       </button>
       <ul class="dropdown-menu">
 	<li><a href="#" class="dropdown-item small">수정</a></li>
-	<li><a href="{% url 'openpost:remove_comment' id=comment.id %}" class="dropdown-item small" onclick="return confirm('메세지를 삭제하시겠습니까?')">삭제</a></li>
+	<li><a href="#" class="dropdown-item small" data-bs-toggle="modal" data-bs-target="#confirmRemoval" data-bs-href="{% url 'openpost:remove_comment' id=comment.id %}">삭제</a></li>
       </ul>
     </div>
   </li>
