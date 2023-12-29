@@ -14,10 +14,13 @@ def index(request):
     return render(request, "openpost/index.html", context=context)
 
 def add_post(request):
-    if "section" in request.POST and "subject" in request.POST and "content" in request.POST:
-        post = Post.objects.create(section=request.POST["section"],
-                                   subject=request.POST["subject"],
-                                   content=request.POST["content"])
+    section = request.POST.get("section", None)
+    subject = request.POST.get("subject", "")
+    content = request.POST.get("content", "")
+    if section:
+        Post.objects.create(section=section,
+                            subject=subject,
+                            content=content)
     return redirect("openpost:index")
 
 def edit_post(request, id):
@@ -30,7 +33,8 @@ def edit_post(request, id):
     return render(request, "openpost/index.html", context=context)
 
 def update_post(request):
-    post = get_object_or_404(Post, id=request.POST.get("id", 0))
+    id = request.POST.get("id", None)
+    post = get_object_or_404(Post, id=id)
     post.subject = request.POST.get("subject", "")
     post.content = request.POST.get("content", "")
     post.save()
@@ -42,11 +46,12 @@ def remove_post(request, id):
     return redirect("openpost:index")
 
 def add_comment(request):
-    if "id" in request.POST and Post.objects.filter(id=request.POST["id"]).exists() and "content" in request.POST:
-        post = Post.objects.get(id=request.POST["id"])
-        comment = Comment.objects.create(post=post,
-                                         content=request.POST["content"])
-        comment.save()
+    try:
+        post = Post.objects.get(id=request.POST.get("id", None))
+        content = request.POST.get("content", "")
+        Comment.objects.create(post=post, content=content)
+    except Post.DoesNotExist:
+        pass
     return redirect("openpost:index")
 
 def edit_comment(request, id):
@@ -59,7 +64,7 @@ def edit_comment(request, id):
     return render(request, "openpost/index.html", context=context)
 
 def update_comment(request):
-    comment = get_object_or_404(Comment, id=request.POST.get("id", 0))
+    comment = get_object_or_404(Comment, id=request.POST.get("id", None))
     comment.content = request.POST.get("content", "")
     comment.save()
     return redirect("openpost:index")
