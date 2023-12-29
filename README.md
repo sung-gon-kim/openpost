@@ -4,8 +4,11 @@ This project is a simple web application which supports team communications incl
 
 ## Prerequisite
 
-You need to install the following packages
+It is recommended to use virtualenv to install required packages.
 
+    $ apt-get install python3-venv
+    $ python -m venv venv
+    $ source venv/bin/activate
     $ python -m pip install Django django-model-utils
 
 ## How to run tests
@@ -28,6 +31,12 @@ You may access the development server via a web-browser after the following comm
     $ python manage.py createsuperuser
 
 Then, access http://localhost:8000/admin via a web-browser
+
+## How to deactivate the virtualenv
+
+You may deactive the virtualenv using the following command:
+
+    $ deactivate
 
 ## License
 
