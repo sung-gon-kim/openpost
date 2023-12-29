@@ -9,11 +9,7 @@ It is recommended to use virtualenv to install required packages.
     $ apt-get install python3-venv
     $ python -m venv venv
     $ source venv/bin/activate
-    $ python -m pip install Django django-model-utils
-
-## How to run tests
-
-    $ python manage.py test openpost
+    $ python -m pip install Django django-model-utils coverage
 
 ## How to create DB tables
 
@@ -26,11 +22,14 @@ You may access the development server via a web-browser after the following comm
 
     $ python manage.py runserver 0.0.0.0:8000
 
-## How to login as a super user
+## How to run tests
 
-    $ python manage.py createsuperuser
+    $ python manage.py test openpost
 
-Then, access http://localhost:8000/admin via a web-browser
+## How to measure code coverage
+
+    $ coverage run --source='.' manage.py test openpost
+    $ coverage report
 
 ## How to deactivate the virtualenv
 
