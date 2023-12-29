@@ -6,5 +6,10 @@
     {% include "./sections.html" with section="의견" posts=opinions %}
   </div>
 </div>
-{% include "./modal_forms.html" %}
+
+{% if post %}
+{% include "./post_modal.html" %}
+{% endif %}
+
+{% include "./confirm_modal.html" %}
 {% include "./html_footer.html" %}
