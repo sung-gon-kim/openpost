@@ -1,7 +1,7 @@
 {% for post in posts %}
 <div class="card shadow-sm bg-white rounded my-2">
   <div class="card-body">
-    <h5 class="card-title d-flex justify-content-between align-items-center">
+    <h5 class="card-title d-flex justify-content-between align-items-center text-break">
       {{ post.subject }}
       <div class="dropdown">
 	<button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -13,7 +13,7 @@
 	</ul>
       </div>
     </h5>
-    <p class="card-text">{{ post.content|urlize|linebreaksbr }}</p>
+    <p class="card-text text-break">{{ post.content|urlize|linebreaksbr }}</p>
     {% include "./comments.html" with comments=post.comment_set.all %}
     <form action="{% url 'openpost:add_comment' %}" method="post">
       {% csrf_token %}
