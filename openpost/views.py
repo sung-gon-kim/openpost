@@ -18,7 +18,6 @@ def add_post(request):
         post = Post.objects.create(section=request.POST["section"],
                                    subject=request.POST["subject"],
                                    content=request.POST["content"])
-        post.save()
     return redirect("openpost:index")
 
 def edit_post(request, id):
