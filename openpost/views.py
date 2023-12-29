@@ -50,6 +50,22 @@ def add_comment(request):
         comment.save()
     return redirect("openpost:index")
 
+def edit_comment(request, id):
+    if id is not None:
+        context = {
+            "notices": Post.objects.filter(section="공지사항"),
+            "questions": Post.objects.filter(section="질문"),
+            "opinions": Post.objects.filter(section="의견"),
+            "comment": Comment.objects.get(id=id),
+        }
+        return render(request, "openpost/index.html", context=context)
+    return redirect("openpost:index")
+
+def update_comment(request):
+    if "id" in request.POST and "content" in request.POST:
+        Comment.objects.filter(id=request.POST["id"]).update(content=request.POST["content"])
+    return redirect("openpost:index")
+
 def remove_comment(request, id):
     if id is not None:
         Comment.objects.filter(id=id).delete()

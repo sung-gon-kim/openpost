@@ -8,7 +8,9 @@
 </div>
 
 {% if post %}
-{% include "./post_modal.html" %}
+  {% include "./post_modal.html" %}
+{% elif comment %}
+  {% include "./comment_modal.html" %}
 {% endif %}
 
 {% include "./confirm_modal.html" %}
