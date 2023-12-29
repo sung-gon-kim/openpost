@@ -1,6 +1,7 @@
 from .models import Comment
 from .models import Post
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 
@@ -21,25 +22,24 @@ def add_post(request):
     return redirect("openpost:index")
 
 def edit_post(request, id):
-    if id is not None:
-        context = {
-            "notices": Post.objects.filter(section="공지사항"),
-            "questions": Post.objects.filter(section="질문"),
-            "opinions": Post.objects.filter(section="의견"),
-            "post": Post.objects.get(id=id),
-        }
-        return render(request, "openpost/index.html", context=context)
-    return redirect("openpost:index")
+    context = {
+        "notices": Post.objects.filter(section="공지사항"),
+        "questions": Post.objects.filter(section="질문"),
+        "opinions": Post.objects.filter(section="의견"),
+        "post": get_object_or_404(Post, id=id),
+    }
+    return render(request, "openpost/index.html", context=context)
 
 def update_post(request):
-    if "id" in request.POST and "subject" in request.POST and "content" in request.POST:
-        Post.objects.filter(id=request.POST["id"]).update(subject=request.POST["subject"],
-                                                          content=request.POST["content"])
+    post = get_object_or_404(Post, id=request.POST.get("id", 0))
+    post.subject = request.POST.get("subject", "")
+    post.content = request.POST.get("content", "")
+    post.save()
     return redirect("openpost:index")
 
 def remove_post(request, id):
-    if id is not None:
-        Post.objects.filter(id=id).delete()
+    post = get_object_or_404(Post, id=id)
+    post.delete()
     return redirect("openpost:index")
 
 def add_comment(request):

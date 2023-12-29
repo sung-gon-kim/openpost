@@ -6,7 +6,7 @@ from model_utils import Choices
 class Post(models.Model):
     SECTION = Choices('공지사항', '질문', '의견')
     section = models.CharField(choices=SECTION, default=SECTION.공지사항, max_length=10)
-    subject = models.CharField(default="Untitled", max_length=30)
+    subject = models.CharField(max_length=30)
     content = models.TextField()
     created = timezone.now()
 
