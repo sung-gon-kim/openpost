@@ -43,7 +43,7 @@ def remove_post(request, id):
     return redirect("openpost:index")
 
 def add_comment(request):
-    if "id" in request.POST and "content" in request.POST:
+    if "id" in request.POST and Post.objects.filter(id=request.POST["id"]).exists() and "content" in request.POST:
         post = Post.objects.get(id=request.POST["id"])
         comment = Comment.objects.create(post=post,
                                          content=request.POST["content"])
@@ -51,22 +51,21 @@ def add_comment(request):
     return redirect("openpost:index")
 
 def edit_comment(request, id):
-    if id is not None:
-        context = {
-            "notices": Post.objects.filter(section="공지사항"),
-            "questions": Post.objects.filter(section="질문"),
-            "opinions": Post.objects.filter(section="의견"),
-            "comment": Comment.objects.get(id=id),
-        }
-        return render(request, "openpost/index.html", context=context)
-    return redirect("openpost:index")
+    context = {
+        "notices": Post.objects.filter(section="공지사항"),
+        "questions": Post.objects.filter(section="질문"),
+        "opinions": Post.objects.filter(section="의견"),
+        "comment": get_object_or_404(Comment, id=id),
+    }
+    return render(request, "openpost/index.html", context=context)
 
 def update_comment(request):
-    if "id" in request.POST and "content" in request.POST:
-        Comment.objects.filter(id=request.POST["id"]).update(content=request.POST["content"])
+    comment = get_object_or_404(Comment, id=request.POST.get("id", 0))
+    comment.content = request.POST.get("content", "")
+    comment.save()
     return redirect("openpost:index")
 
 def remove_comment(request, id):
-    if id is not None:
-        Comment.objects.filter(id=id).delete()
+    comment = get_object_or_404(Comment, id=id)
+    comment.delete()
     return redirect("openpost:index")
