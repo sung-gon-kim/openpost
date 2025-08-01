@@ -6,7 +6,7 @@ This project is a simple web application which supports team communications incl
 
 It is recommended to use virtualenv to install required packages.
 
-    $ sudo apt-get install python3 python3-venv
+    $ sudo apt-get install python3 python3-venv python-is-python3
     $ python -m venv venv
     $ source venv/bin/activate
     $ python -m pip install Django django-model-utils coverage
